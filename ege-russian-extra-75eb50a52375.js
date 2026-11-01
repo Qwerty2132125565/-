@@ -5,4 +5,6 @@ const bank=window.EGE_TESTS;
 if(!Array.isArray(bank))throw new Error("Не загружена база заданий");
 for(const test of bank)if(test.subject==="russian"&&test.topic==="Сочинение · Письменная практика")test.topicOrder=7;
 for(const test of additions)if(!bank.some(item=>item.id===test.id))bank.push(test);
+const ordered=bank.filter(t=>t.subject==="russian").sort((a,b)=>a.topicOrder-b.topicOrder||a.part-b.part);
+let position=0;for(let i=0;i<bank.length;i++)if(bank[i].subject==="russian")bank[i]=ordered[position++];
 })();
