@@ -1,0 +1,1 @@
+window.addEventListener('load',()=>{if(!window.EGE_READY){document.getElementById('app').innerHTML='<section class="card"><h1>Не удалось загрузить задания</h1><p>Проверьте подключение к интернету и обновите страницу.</p><button onclick="location.reload()">Обновить страницу</button></section>';}});
