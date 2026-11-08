@@ -1,0 +1,77 @@
+/* ===== ЕГЭ · анимации и эффекты (поверх основного стиля) ===== */
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+body{position:relative}
+body::before,body::after{content:"";position:fixed;z-index:-1;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);pointer-events:none}
+body::before{background:#8e77e8;opacity:.26;top:-25vmax;left:-20vmax;animation:fxBlob1 24s ease-in-out infinite alternate}
+body::after{background:#2fb8d6;opacity:.14;bottom:-30vmax;right:-25vmax;animation:fxBlob2 30s ease-in-out infinite alternate}
+@keyframes fxBlob1{to{transform:translate(18vmax,12vmax) scale(1.15)}}
+@keyframes fxBlob2{to{transform:translate(-16vmax,-10vmax) scale(1.2)}}
+@keyframes fxUp{from{opacity:0;transform:translateY(26px) scale(.98)}}
+@keyframes fxFade{from{opacity:0}}
+@keyframes fxPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes fxShake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes fxDrop{from{opacity:0;transform:translateY(-14px) scale(.97)}}
+@keyframes fxSlide{to{background-position:-200% 0}}
+@keyframes fxBob{50%{transform:translateY(-5px) rotate(-4deg)}}
+@keyframes fxGlow{50%{box-shadow:0 0 28px #b7a2ff77}}
+@keyframes fxSpin{to{--a:360deg}}
+@keyframes fxShine{to{transform:translateX(260%) skewX(-20deg)}}
+@keyframes fxToast{0%{opacity:0;transform:translate(-50%,-20px) scale(.8)}15%,80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-14px)}}
+@keyframes fxRip{to{transform:scale(1);opacity:0}}
+#fxBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8e77e8,#7ce1d9);z-index:60;box-shadow:0 0 12px #8e77e8}
+#fxCanvas{position:fixed;inset:0;pointer-events:none;z-index:70}
+#app>*{animation:fxFade .35s ease both}
+/* шапка */
+.logo{animation:fxGlow 3.5s ease-in-out infinite;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.brand-home:hover .logo{transform:rotate(-12deg) scale(1.12)}
+/* главная */
+.home-hero>*,.hero>*{animation:fxUp .7s cubic-bezier(.2,.8,.2,1) backwards}
+.home-hero>*:nth-child(2),.hero>*:nth-child(2){animation-delay:.1s}
+.home-hero>*:nth-child(3),.hero>*:nth-child(3){animation-delay:.2s}
+.home-hero>*:nth-child(4),.hero>*:nth-child(4){animation-delay:.3s}
+h1 span{background:linear-gradient(90deg,#b7a2ff,#7ce1d9,#b7a2ff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:fxSlide 5s linear infinite}
+.result h1 span{-webkit-text-fill-color:var(--muted);background:none;animation:none}
+.subject-card,.test-card{position:relative;overflow:hidden;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out,border-color .2s,background .2s,box-shadow .25s;animation:fxUp .65s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*110ms + .25s)}
+.subject-card:hover:not(:disabled),.test-card:hover:not(:disabled){transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-5px);box-shadow:0 22px 50px #0006,0 0 0 1px #b7a2ff55}
+.subject-card::after,.test-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),#b7a2ff30,transparent 62%);opacity:0;transition:opacity .25s;pointer-events:none}
+.subject-card:hover::after,.test-card:hover::after{opacity:1}
+.subject-card.available::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--a),transparent 0 65%,#b7a2ff,#7ce1d9,transparent);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:fxSpin 5s linear infinite;pointer-events:none}
+.subject-icon{animation:fxBob 4.5s ease-in-out infinite}
+.subject-card:nth-child(2) .subject-icon{animation-delay:-1.4s}.subject-card:nth-child(3) .subject-icon{animation-delay:-2.8s}
+.subject-bottom>span:last-child,.test-card-bottom>span{display:inline-block;transition:transform .25s}
+.subject-card:hover .subject-bottom>span:last-child,.test-card:hover .test-card-bottom>span{transform:translateX(8px)}
+.test-number{background:linear-gradient(135deg,#b7a2ff,#7ce1d9);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mini,.stat{animation:fxUp .5s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*80ms + .15s);transition:transform .2s,border-color .2s}
+.mini:hover,.stat:hover{transform:translateY(-3px);border-color:#8e77e8}
+/* кнопки */
+.primary{position:relative;overflow:hidden}
+.primary:not(:disabled)::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,#fff7,transparent);transform:skewX(-20deg)}
+.primary:not(:disabled):hover::after{animation:fxShine .8s ease}
+.primary:not(:disabled){box-shadow:0 8px 24px #8e77e855}
+.fx-rip{position:absolute;border-radius:50%;background:#ffffff55;transform:scale(0);animation:fxRip .7s ease-out forwards;pointer-events:none}
+/* тест */
+.fill{background-image:linear-gradient(90deg,#8e77e8,#ccbbff,#8e77e8);background-size:200% 100%;animation:fxSlide 2.2s linear infinite;box-shadow:0 0 12px #b7a2ff88}
+.option{transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;animation:fxUp .45s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*70ms + .1s)}
+.option:hover{border-color:#8e77e8;transform:translateX(5px)}
+fieldset:disabled .option:hover{transform:none;border-color:var(--line)}
+.option:has(input:checked){transform:translateX(8px);box-shadow:0 0 0 1px var(--accent),0 8px 24px #8e77e833}
+.option.correct,.option.correct:has(input:checked){animation:fxPop .5s cubic-bezier(.3,1.5,.5,1);box-shadow:inset 0 0 0 1px var(--green),0 0 26px #7ce1b233}
+.option.wrong,.option.wrong:has(input:checked){animation:fxShake .45s}
+.order-row{animation:fxUp .4s backwards;animation-delay:calc(var(--i,0)*60ms)}
+.feedback:not([hidden]){animation:fxDrop .5s cubic-bezier(.2,.8,.2,1)}
+.feedback.good{box-shadow:0 0 30px #7ce1b222}
+.fx-shake{animation:fxShake .45s!important}
+.hint-text:not([hidden]){animation:fxDrop .4s}
+.mistake{animation:fxUp .5s backwards;animation-delay:calc(var(--i,0)*80ms)}
+.question-figure img,.map-button img{transition:transform .4s}
+.question-figure:hover img,.map-button:hover img{transform:scale(1.03)}
+/* результат */
+.result h1{animation:fxPop 1s cubic-bezier(.3,1.5,.5,1) both}
+.grade{animation:fxGlow 2.4s ease-in-out infinite,fxUp .6s .5s backwards}
+dialog[open]{animation:fxPop .35s cubic-bezier(.3,1.4,.5,1)}
+dialog::backdrop{backdrop-filter:blur(6px)}
+.fx-toast{position:fixed;left:50%;top:max(18px,env(safe-area-inset-top));transform:translateX(-50%);z-index:80;padding:10px 20px;border-radius:99px;background:linear-gradient(90deg,#8e77e8,#e0785f);color:#fff;font-weight:750;box-shadow:0 10px 30px #0008;animation:fxToast 1.8s ease both;pointer-events:none}
+
+fieldset:disabled .option.correct:hover{border-color:var(--green)}
+fieldset:disabled .option.wrong:hover{border-color:var(--red)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
